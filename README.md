@@ -1,0 +1,1 @@
+# tarfficfrnd-vendor-patner

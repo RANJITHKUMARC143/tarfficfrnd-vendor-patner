@@ -1,0 +1,27 @@
+# Node
+node_modules/
+**/node_modules/
+
+# Builds
+/dist/
+**/dist/
+*.log
+
+# Env files
+.env
+server/.env
+server/.env.*
+
+# MacOS
+.DS_Store
+
+# Uploads (runtime artifacts)
+server/uploads/
+server/server.out
+
+# Vite/TS cache
+.vite/
+*.tsbuildinfo
+
+# Coverage
+coverage/
