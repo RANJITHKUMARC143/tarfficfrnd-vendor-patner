@@ -79,10 +79,19 @@ app.post('/api/send-otp', async (req, res) => {
         });
       } catch (twilioError) {
         console.error('Twilio error:', twilioError);
-        res.status(500).json({
+        const response = {
           success: false,
           message: 'Failed to send OTP. Please try again.'
-        });
+        };
+        if (process.env.NODE_ENV !== 'production') {
+          response.debug = {
+            code: twilioError.code,
+            status: twilioError.status,
+            message: twilioError.message,
+            moreInfo: twilioError.moreInfo
+          };
+        }
+        res.status(500).json(response);
       }
     } else {
       // Demo mode - just log the OTP for development
