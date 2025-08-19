@@ -142,7 +142,7 @@ const RegistrationForm = () => {
   const sendOTP = async () => {
     if (formData.contactNumber.length === 10) {
       try {
-        const response = await fetch('http://localhost:3001/api/send-otp', {
+        const response = await fetch('https://tarfficfrnd-vendor-patner.onrender.com/api/send-otp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ phoneNumber: formData.contactNumber })
@@ -190,7 +190,7 @@ const RegistrationForm = () => {
     const enteredOTP = otp.join('');
     if (enteredOTP.length === 4) {
       try {
-        const response = await fetch('http://localhost:3001/api/verify-otp', {
+        const response = await fetch('https://tarfficfrnd-vendor-patner.onrender.com/api/verify-otp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -252,7 +252,7 @@ const RegistrationForm = () => {
     if (files.aadhaarCard) form.append('aadhaarCard', files.aadhaarCard as File);
     if (files.panCard) form.append('panCard', files.panCard as File);
 
-    fetch('http://localhost:3001/api/registrations', {
+    fetch('https://tarfficfrnd-vendor-patner.onrender.com/api/registrations', {
       method: 'POST',
       body: form,
     })
