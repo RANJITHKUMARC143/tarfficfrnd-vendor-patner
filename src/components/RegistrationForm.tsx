@@ -144,8 +144,8 @@ const RegistrationForm = () => {
       try {
         const response = await fetch('https://tarfficfrnd-vendor-patner.onrender.com/api/send-otp', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phoneNumber: formData.contactNumber })
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ phoneNumber: formData.contactNumber }).toString()
         });
         
         const data = await response.json();
@@ -192,11 +192,8 @@ const RegistrationForm = () => {
       try {
         const response = await fetch('https://tarfficfrnd-vendor-patner.onrender.com/api/verify-otp', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            phoneNumber: formData.contactNumber,
-            otp: enteredOTP
-          })
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ phoneNumber: formData.contactNumber, otp: enteredOTP }).toString()
         });
         
         const data = await response.json();
