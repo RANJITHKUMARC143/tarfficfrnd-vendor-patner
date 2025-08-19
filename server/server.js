@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // In-memory storage for OTPs (in production, use Redis or database)
@@ -42,10 +43,15 @@ const generateOTP = () => {
 // Send OTP endpoint
 app.post('/api/send-otp', async (req, res) => {
   try {
-    const { phoneNumber } = req.body;
+    const { phoneNumber: inputPhone } = req.body;
+
+    // Normalize phone number: remove spaces and optional +91 country code
+    const phoneNumber = String(inputPhone || '')
+      .replace(/\s+/g, '')
+      .replace(/^\+?91/, '');
 
     // Validate phone number
-    if (!phoneNumber || phoneNumber.length !== 10) {
+    if (!/^\d{10}$/.test(phoneNumber)) {
       return res.status(400).json({
         success: false,
         message: 'Please provide a valid 10-digit phone number'
@@ -104,10 +110,14 @@ app.post('/api/send-otp', async (req, res) => {
 // Verify OTP endpoint
 app.post('/api/verify-otp', async (req, res) => {
   try {
-    const { phoneNumber, otp } = req.body;
+    const { phoneNumber: inputPhone, otp } = req.body;
+
+    const phoneNumber = String(inputPhone || '')
+      .replace(/\s+/g, '')
+      .replace(/^\+?91/, '');
 
     // Validate inputs
-    if (!phoneNumber || !otp) {
+    if (!/^\d{10}$/.test(phoneNumber) || !otp) {
       return res.status(400).json({
         success: false,
         message: 'Phone number and OTP are required'
