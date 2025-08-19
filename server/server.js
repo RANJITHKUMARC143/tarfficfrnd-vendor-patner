@@ -22,6 +22,7 @@ const otpStore = new Map();
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
+const twilioMessagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID;
 
 // Initialize Twilio client
 let twilioClient;
@@ -65,11 +66,16 @@ app.post('/api/send-otp', async (req, res) => {
     // Send SMS via Twilio
     if (twilioClient) {
       try {
-        await twilioClient.messages.create({
+        const smsPayload = {
           body: `Your Traffic Frnd verification code is: ${otp}. Valid for 5 minutes.`,
-          from: twilioPhoneNumber,
           to: `+91${phoneNumber}`
-        });
+        };
+        if (twilioMessagingServiceSid) {
+          smsPayload.messagingServiceSid = twilioMessagingServiceSid;
+        } else {
+          smsPayload.from = twilioPhoneNumber;
+        }
+        await twilioClient.messages.create(smsPayload);
 
         console.log(`OTP sent to ${phoneNumber}: ${otp}`);
         
