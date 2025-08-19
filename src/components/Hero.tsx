@@ -13,6 +13,10 @@ const Hero = () => {
     <section id="home" className="bg-gradient-to-br from-orange-50 to-green-50 py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <img src="/logo.png" alt="Traffic Frnd" className="h-32 w-auto object-contain" />
+          </div>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
             Partner with Traffic Frnd
           </h1>

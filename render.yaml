@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: traffic-frnd-backend
+    env: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+    healthCheckPath: /api/health
+

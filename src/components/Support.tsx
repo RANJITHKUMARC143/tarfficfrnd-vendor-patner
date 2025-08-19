@@ -84,10 +84,10 @@ const Support = () => {
                     <h4 className="text-lg font-semibold text-gray-900">Phone Support</h4>
                     <p className="text-gray-600">Call us for immediate assistance</p>
                     <a 
-                      href="tel:+919353069942" 
+                      href="tel:+917892979533" 
                       className="text-green-600 font-semibold hover:text-green-700 transition-colors duration-200"
                     >
-                      +91 93530 69942
+                      +91 78929 79533
                     </a>
                   </div>
                 </div>
@@ -103,7 +103,7 @@ const Support = () => {
                     <h4 className="text-lg font-semibold text-gray-900">WhatsApp Support</h4>
                     <p className="text-gray-600">Quick help via WhatsApp</p>
                     <a 
-                      href="https://wa.me/919353069942" 
+                      href="https://wa.me/917892979533" 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-600 font-semibold hover:text-green-700 transition-colors duration-200"
