@@ -16,6 +16,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Ensure JSON errors return JSON (not HTML)
+app.use((err, req, res, next) => {
+  if (err && err.type === 'entity.parse.failed') {
+    return res.status(400).json({ success: false, message: 'Invalid JSON body' });
+  }
+  if (err instanceof SyntaxError && 'body' in err) {
+    return res.status(400).json({ success: false, message: 'Invalid JSON body' });
+  }
+  next(err);
+});
+
 // In-memory storage for OTPs (in production, use Redis or database)
 const otpStore = new Map();
 
